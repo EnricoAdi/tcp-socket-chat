@@ -1,7 +1,7 @@
 ﻿
 namespace tcp_client_gui
 {
-    partial class Form1
+    partial class FormChatClient
     {
         /// <summary>
         /// Required designer variable.
@@ -71,7 +71,7 @@ namespace tcp_client_gui
             this.listchat.Size = new System.Drawing.Size(745, 244);
             this.listchat.TabIndex = 3;
             // 
-            // Form1
+            // FormChatClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -80,8 +80,9 @@ namespace tcp_client_gui
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtMsg);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "FormChatClient";
+            this.Text = "Form Chat Client";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormChatClient_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

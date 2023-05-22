@@ -6,20 +6,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms; 
+using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
-
-namespace tcp_server_gui
+namespace tcp_client_gui
 {
-    public partial class Form1 : Form
+    public partial class FormChatServer : Form
     {
-        public Form1()
+        public FormChatServer(string nameParam)
         {
             InitializeComponent();
+            name = nameParam;
         }
+
         Socket sck;
         Socket acc;
         int port = 11111;
@@ -27,17 +28,13 @@ namespace tcp_server_gui
         Thread rec;
 
         string name;
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        private void FormChatServer_Load(object sender, EventArgs e)
+        { 
             try
-            {
-                //string asd = GetIp();
-                //Console.WriteLine(asd);
+            { 
                 Console.WriteLine("Waiting for connection");
                 rec = new Thread(recV);
-
-                name = "EnricoServer";
+                 
                 lblIP.Text = "IP : " + GetIp();
                 lblTitle.Text = name;
 
@@ -54,6 +51,12 @@ namespace tcp_server_gui
             {
                 MessageBox.Show(exc.Message.ToString());
             }
+        }
+
+        private void FormChatServer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainMenuServer m = new MainMenuServer();
+            m.Show();
         }
 
         string GetIp()
@@ -75,12 +78,12 @@ namespace tcp_server_gui
                     int rec = acc.Receive(Buffer, 0, Buffer.Length, 0);
                     Array.Resize(ref Buffer, rec);
 
-                    string msgGet = Encoding.Default.GetString(Buffer); 
+                    string msgGet = Encoding.Default.GetString(Buffer);
 
                     this.Invoke(new Action(() => this.addChat(msgGet)));
 
 
-                    string[] ipSenderArr = acc.RemoteEndPoint.ToString().Split(':'); 
+                    string[] ipSenderArr = acc.RemoteEndPoint.ToString().Split(':');
                     string ipSender = ipSenderArr[0];
                     Console.WriteLine(ipSender);
                 }
@@ -90,6 +93,26 @@ namespace tcp_server_gui
                 rec.Abort();
                 MessageBox.Show("Disconnected");
             }
+
+        }
+        void sendChat(string message)
+        {
+            try
+            {
+                //byte[] sdata = Encoding.Default.GetBytes("<" + name + ">" + message);
+                byte[] sdata = Encoding.Default.GetBytes(name + ": " + message);
+
+                acc.Send(sdata, 0, sdata.Length, 0);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Disconnected");
+                this.Close();
+            }
+        }
+        public void addChat(string msg)
+        {
+            listchat.Items.Add(msg);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -100,51 +123,7 @@ namespace tcp_server_gui
 
             addChat("You : " + message);
 
-            sendChat(message); 
-        }
-
-        void sendChat(string message)
-        {
-            try
-            { 
-                //byte[] sdata = Encoding.Default.GetBytes("<" + name + ">" + message);
-                byte[] sdata = Encoding.Default.GetBytes( name + ": " + message);
-
-                acc.Send(sdata, 0, sdata.Length, 0);
-            }
-            catch (Exception)
-            { 
-                MessageBox.Show("Disconnected");
-                this.Close();
-            }
-        }
-        public void addChat(string msg)
-        {
-            listchat.Items.Add(msg);
-        }
-    }
-
-
-    public struct ChatRow
-    {
-        public string from;
-        public string to;
-        public string message;
-    }
-    public struct PeerDetail
-    {
-        public PeerDetail(string ip, string username)
-        {
-            this.ipAddress = ip;
-            this.username = username;
-        }
-
-        public readonly string ipAddress;
-        public readonly string username;
-
-        public IPAddress GetIPAddress()
-        {
-            return IPAddress.Parse(this.ipAddress);
+            sendChat(message);
         }
     }
 }

@@ -13,9 +13,9 @@ using System.Threading;
 
 namespace tcp_client_gui
 {
-    public partial class Form1 : Form
+    public partial class FormChatClient : Form
     {
-        public Form1(string uname, string ipChoose, int portChoose)
+        public FormChatClient(string uname, string ipChoose, int portChoose)
         {
             InitializeComponent(); 
             name = uname;
@@ -81,7 +81,7 @@ namespace tcp_client_gui
             {
                 MessageBox.Show("Failed to connect");
                 this.Close();
-                MainMenu m = new MainMenu();
+                MainMenuClient m = new MainMenuClient();
                 m.Show();
             }
              
@@ -115,8 +115,15 @@ namespace tcp_client_gui
             catch (Exception)
             {
                 MessageBox.Show("Disconnected");
+
+                this.Close(); 
             }
         }
 
+        private void FormChatClient_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainMenuClient m = new MainMenuClient();
+            m.Show();
+        }
     }
 }

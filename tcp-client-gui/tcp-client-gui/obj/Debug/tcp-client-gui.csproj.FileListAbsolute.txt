@@ -9,3 +9,17 @@ C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-client-
 C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-client-gui\tcp-client-gui\obj\Debug\tcp-client-gui.exe
 C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-client-gui\tcp-client-gui\obj\Debug\tcp-client-gui.pdb
 C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-client-gui\tcp-client-gui\obj\Debug\tcp_client_gui.MainMenu.resources
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\bin\Debug\tcp-client-gui.exe.config
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\bin\Debug\tcp-client-gui.exe
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\bin\Debug\tcp-client-gui.pdb
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp-client-gui.csprojAssemblyReference.cache
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp_client_gui.MainMenu.resources
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp_client_gui.Properties.Resources.resources
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp-client-gui.csproj.GenerateResource.cache
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp-client-gui.csproj.CoreCompileInputs.cache
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp-client-gui.exe
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp-client-gui.pdb
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp_client_gui.FormChatClient.resources
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp_client_gui.MainMenuClient.resources
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp_client_gui.MainMenuServer.resources
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-client-gui\tcp-client-gui\obj\Debug\tcp_client_gui.FormChatServer.resources

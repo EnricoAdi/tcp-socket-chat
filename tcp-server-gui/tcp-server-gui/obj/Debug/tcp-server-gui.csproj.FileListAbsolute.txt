@@ -8,3 +8,13 @@ C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-server-
 C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-server-gui\tcp-server-gui\obj\Debug\tcp-server-gui.csproj.CoreCompileInputs.cache
 C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-server-gui\tcp-server-gui\obj\Debug\tcp-server-gui.exe
 C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-server-gui\tcp-server-gui\obj\Debug\tcp-server-gui.pdb
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-server-gui\tcp-server-gui\bin\Debug\tcp-server-gui.exe
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-server-gui\tcp-server-gui\bin\Debug\tcp-server-gui.exe.config
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-server-gui\tcp-server-gui\obj\Debug\tcp_server_gui.Form1.resources
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-server-gui\tcp-server-gui\obj\Debug\tcp_server_gui.Properties.Resources.resources
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-server-gui\tcp-server-gui\obj\Debug\tcp-server-gui.csproj.GenerateResource.cache
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-server-gui\tcp-server-gui\obj\Debug\tcp-server-gui.csproj.CoreCompileInputs.cache
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-server-gui\tcp-server-gui\obj\Debug\tcp-server-gui.exe
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-server-gui\tcp-server-gui\obj\Debug\tcp-server-gui.pdb
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-server-gui\tcp-server-gui\bin\Debug\tcp-server-gui.pdb
+C:\1.KULIAH\SISTEM_INFORMASI_BISNIS_ENRICO\SEMESTER_6\JARKOM\project\tcp-socket-chat\tcp-server-gui\tcp-server-gui\obj\Debug\tcp-server-gui.csprojAssemblyReference.cache

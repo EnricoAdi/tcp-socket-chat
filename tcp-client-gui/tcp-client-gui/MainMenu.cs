@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
 
 namespace tcp_client_gui
 {
@@ -19,33 +17,34 @@ namespace tcp_client_gui
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            string choosePartner = listPartner.SelectedItem.ToString();
-            string username = txtUsername.Text;
-            int port = 11111;
-            if (username == "" || choosePartner=="")
-            {
-                MessageBox.Show("Username dan partner harus diisi");
-                return;
-            }
-             
-            Form1 f = new Form1(username,choosePartner,port);
-            f.Show();
-            this.Hide();
-            
-
-        }
-
         private void MainMenu_Load(object sender, EventArgs e)
         {
+            cbbRole.Items.Add("Server");
+            cbbRole.Items.Add("Client");
+            cbbRole.SelectedIndex = 0;
+        }
 
-            IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
-            for (int i = 0; i < ipHost.AddressList.Length; i++)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (cbbRole.SelectedIndex == 0)
             {
-                listPartner.Items.Add(ipHost.AddressList[i]);
+                //server
+                MainMenuServer m = new MainMenuServer();
+                m.Show();
+                this.Hide();
             }
+            else
+            {
+                //client
+                MainMenuClient m = new MainMenuClient();
+                m.Show();
+                this.Hide();
+            }
+        }
+
+        private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
