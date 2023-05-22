@@ -22,7 +22,7 @@ namespace tcp_client_gui
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string choosePartner = listPartner.SelectedItem.ToString();
+            string choosePartner = txtIP.Text.ToString();
             string username = txtUsername.Text;
             int port = 11111;
             if (username == "" || choosePartner=="")
@@ -54,6 +54,11 @@ namespace tcp_client_gui
         { 
             MainMenu m = new MainMenu();
             m.Show();
+        }
+
+        private void listPartner_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtIP.Text = listPartner.SelectedItem.ToString();
         }
     }
 }

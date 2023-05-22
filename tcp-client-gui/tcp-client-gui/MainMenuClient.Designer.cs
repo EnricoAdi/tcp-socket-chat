@@ -35,6 +35,8 @@ namespace tcp_client_gui
             this.label2 = new System.Windows.Forms.Label();
             this.listPartner = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtIP = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -83,21 +85,40 @@ namespace tcp_client_gui
             this.listPartner.Name = "listPartner";
             this.listPartner.Size = new System.Drawing.Size(380, 196);
             this.listPartner.TabIndex = 7;
+            this.listPartner.SelectedIndexChanged += new System.EventHandler(this.listPartner_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(25, 131);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 17);
+            this.label3.Size = new System.Drawing.Size(114, 17);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Choose Partner : ";
+            this.label3.Text = "Choose Server : ";
+            // 
+            // txtIP
+            // 
+            this.txtIP.Location = new System.Drawing.Point(424, 155);
+            this.txtIP.Name = "txtIP";
+            this.txtIP.Size = new System.Drawing.Size(155, 22);
+            this.txtIP.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(421, 131);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(124, 17);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Type IP Manually: ";
             // 
             // MainMenuClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 363);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtIP);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.listPartner);
             this.Controls.Add(this.label2);
@@ -121,5 +142,7 @@ namespace tcp_client_gui
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listPartner;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtIP;
+        private System.Windows.Forms.Label label4;
     }
 }
