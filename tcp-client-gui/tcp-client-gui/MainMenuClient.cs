@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
 namespace tcp_client_gui
@@ -42,12 +43,38 @@ namespace tcp_client_gui
         {
 
             IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
-            for (int i = 0; i < ipHost.AddressList.Length; i++)
+            //for (int i = 0; i < ipHost.AddressList.Length; i++)
+            //{
+            //    listPartner.Items.Add(ipHost.AddressList[i]);
+            //}
+            //listPartner.Items.Add("10.10.1.249");
+            //listPartner.Items.Add("10.10.1.241");
+
+
+            var nics = NetworkInterface.GetAllNetworkInterfaces();
+
+            foreach (var nic in nics)
             {
-                listPartner.Items.Add(ipHost.AddressList[i]);
+                var ipProps = nic.GetIPProperties();
+
+                // We're only interested in IPv4 addresses for this example.
+                var ipv4Addrs = ipProps.UnicastAddresses
+                    .Where(addr => addr.Address.AddressFamily == AddressFamily.InterNetwork)
+                    .Where(addr => addr.Address.ToString() != "127.0.0.1") // Exclude localhost
+                    .Where(addr => addr.Address.ToString().Substring(0, 7) != "169.254"); // Exclude DHCP IP, Windows based
+
+                foreach (var addr in ipv4Addrs)
+                {
+                    var network = IPHelper.CalculateNetwork(addr);
+                    var broadcast = IPHelper.GetBroadcastAddress(addr);
+
+                    if (network != null)
+                    { 
+                            Console.WriteLine("Addr: {0}   Mask: {1}  Network: {2} Broadcast : {3}", addr.Address, addr.IPv4Mask, network, broadcast);
+                        listPartner.Items.Add(addr.Address);
+                    }
+                }
             }
-            listPartner.Items.Add("10.10.1.249");
-            listPartner.Items.Add("10.10.1.241");
         }
 
         private void MainMenuClient_FormClosed(object sender, FormClosedEventArgs e)
@@ -60,5 +87,7 @@ namespace tcp_client_gui
         {
             txtIP.Text = listPartner.SelectedItem.ToString();
         }
+
+ 
     }
 }

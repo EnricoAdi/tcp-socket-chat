@@ -58,6 +58,7 @@
     <Compile Include="FormChatServer.Designer.cs">
       <DependentUpon>FormChatServer.cs</DependentUpon>
     </Compile>
+    <Compile Include="IPHelper.cs" />
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
