@@ -28,10 +28,15 @@ namespace tcp_client_gui
         {
             if (cbbRole.SelectedIndex == 0)
             {
-                //server
-                MainMenuServer m = new MainMenuServer();
-                m.Show();
+                ////server lama
+                //MainMenuServer m = new MainMenuServer();
+                //m.Show();
+                //this.Hide();
+
+                NewServer.Server s = new NewServer.Server();
+                s.Show();
                 this.Hide();
+
             }
             else
             {

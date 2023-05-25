@@ -3,10 +3,51 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets; 
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms; 
+using System.Timers;
+
 namespace tcp_client_gui
 {
     class IPHelper
     {
+        public static List<IPAddressDetail> GetInterfaceIPAddress(bool debug = false)
+        {
+            var nics = NetworkInterface.GetAllNetworkInterfaces();
+            // Using struct for making data 
+            var IPAddresses = new List<IPAddressDetail>();
+
+            foreach (var nic in nics)
+            {
+                var ipProps = nic.GetIPProperties();
+
+                // We're only interested in IPv4 addresses for this example.
+                var ipv4Addrs = ipProps.UnicastAddresses
+                    .Where(addr => addr.Address.AddressFamily == AddressFamily.InterNetwork)
+                    .Where(addr => addr.Address.ToString() != "127.0.0.1") // Exclude localhost
+                    .Where(addr => addr.Address.ToString().Substring(0, 7) != "169.254"); // Exclude DHCP IP, Windows based
+
+                foreach (var addr in ipv4Addrs)
+                {
+                    var network = CalculateNetwork(addr);
+                    var broadcast = GetBroadcastAddress(addr);
+
+                    if (network != null)
+                    {
+                        if (debug)
+                            Console.WriteLine("Addr: {0}   Mask: {1}  Network: {2} Broadcast : {3}", addr.Address, addr.IPv4Mask, network, broadcast);
+                        IPAddresses.Add(new IPAddressDetail(addr: addr.Address.ToString(), broadcast: broadcast.ToString(), mask: addr.IPv4Mask.ToString(), unicast: addr));
+                    }
+                }
+            }
+
+            return IPAddresses;
+        }
 
         public static IPAddress GetBroadcastAddress(UnicastIPAddressInformation unicastAddress)
         {
@@ -37,5 +78,19 @@ namespace tcp_client_gui
             return new IPAddress(result);
         }
     }
+    public struct IPAddressDetail
+    {
+        public IPAddressDetail(string addr, string broadcast, string mask, UnicastIPAddressInformation unicast)
+        {
+            address = addr;
+            this.broadcast = broadcast;
+            this.mask = mask;
+            this.unicast = unicast;
+        }
 
+        public string address;
+        public string broadcast;
+        public string mask;
+        public UnicastIPAddressInformation unicast;
+    }
 }

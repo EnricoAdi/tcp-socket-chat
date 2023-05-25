@@ -52,10 +52,16 @@
     <Compile Include="FormChatClient.Designer.cs">
       <DependentUpon>FormChatClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormChatServer.cs">
+    <Compile Include="NewServer\Server.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormChatServer.Designer.cs">
+    <Compile Include="NewServer\Server.Designer.cs">
+      <DependentUpon>Server.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OldServer\FormChatServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OldServer\FormChatServer.Designer.cs">
       <DependentUpon>FormChatServer.cs</DependentUpon>
     </Compile>
     <Compile Include="IPHelper.cs" />
@@ -71,10 +77,10 @@
     <Compile Include="MainMenuClient.Designer.cs">
       <DependentUpon>MainMenuClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMenuServer.cs">
+    <Compile Include="OldServer\MainMenuServer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMenuServer.Designer.cs">
+    <Compile Include="OldServer\MainMenuServer.Designer.cs">
       <DependentUpon>MainMenuServer.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -82,7 +88,10 @@
     <EmbeddedResource Include="FormChatClient.resx">
       <DependentUpon>FormChatClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormChatServer.resx">
+    <EmbeddedResource Include="NewServer\Server.resx">
+      <DependentUpon>Server.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldServer\FormChatServer.resx">
       <DependentUpon>FormChatServer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
@@ -91,7 +100,7 @@
     <EmbeddedResource Include="MainMenuClient.resx">
       <DependentUpon>MainMenuClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMenuServer.resx">
+    <EmbeddedResource Include="OldServer\MainMenuServer.resx">
       <DependentUpon>MainMenuServer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

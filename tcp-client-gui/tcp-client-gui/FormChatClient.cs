@@ -56,7 +56,7 @@ namespace tcp_client_gui
         void sendChat(string message)
         {
             //byte[] sdata = Encoding.Default.GetBytes("<" + name + ">" + message);
-            byte[] sdata = Encoding.Default.GetBytes(name + ":" + message);
+            byte[] sdata = Encoding.Default.GetBytes(name + ":" + message+"<EOF>");
             sck.Send(sdata, 0, sdata.Length, 0); 
         }
         private void Form1_Load(object sender, EventArgs e)

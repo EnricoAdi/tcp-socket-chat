@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Timers;
 
 namespace tcp_client_gui
 {
@@ -42,14 +43,7 @@ namespace tcp_client_gui
         private void MainMenu_Load(object sender, EventArgs e)
         {
 
-            IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
-            //for (int i = 0; i < ipHost.AddressList.Length; i++)
-            //{
-            //    listPartner.Items.Add(ipHost.AddressList[i]);
-            //}
-            //listPartner.Items.Add("10.10.1.249");
-            //listPartner.Items.Add("10.10.1.241");
-
+            IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName()); 
 
             var nics = NetworkInterface.GetAllNetworkInterfaces();
 
@@ -71,7 +65,8 @@ namespace tcp_client_gui
                     if (network != null)
                     { 
                             Console.WriteLine("Addr: {0}   Mask: {1}  Network: {2} Broadcast : {3}", addr.Address, addr.IPv4Mask, network, broadcast);
-                        listPartner.Items.Add(addr.Address);
+
+                            listPartner.Items.Add(addr.Address);
                     }
                 }
             }
