@@ -33,18 +33,19 @@ namespace tcp_client_gui
             this.button1 = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.listchat = new System.Windows.Forms.ListBox();
+            this.txtTo = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtMsg
             // 
-            this.txtMsg.Location = new System.Drawing.Point(15, 84);
+            this.txtMsg.Location = new System.Drawing.Point(17, 179);
             this.txtMsg.Name = "txtMsg";
             this.txtMsg.Size = new System.Drawing.Size(310, 22);
             this.txtMsg.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(331, 83);
+            this.button1.Location = new System.Drawing.Point(333, 178);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 23);
             this.button1.TabIndex = 1;
@@ -66,16 +67,24 @@ namespace tcp_client_gui
             // 
             this.listchat.FormattingEnabled = true;
             this.listchat.ItemHeight = 16;
-            this.listchat.Location = new System.Drawing.Point(15, 141);
+            this.listchat.Location = new System.Drawing.Point(15, 244);
             this.listchat.Name = "listchat";
             this.listchat.Size = new System.Drawing.Size(745, 244);
             this.listchat.TabIndex = 3;
+            // 
+            // txtTo
+            // 
+            this.txtTo.Location = new System.Drawing.Point(18, 71);
+            this.txtTo.Name = "txtTo";
+            this.txtTo.Size = new System.Drawing.Size(310, 22);
+            this.txtTo.TabIndex = 4;
             // 
             // FormChatClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(822, 524);
+            this.Controls.Add(this.txtTo);
             this.Controls.Add(this.listchat);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.button1);
@@ -95,6 +104,7 @@ namespace tcp_client_gui
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.ListBox listchat;
+        private System.Windows.Forms.TextBox txtTo;
     }
 }
 

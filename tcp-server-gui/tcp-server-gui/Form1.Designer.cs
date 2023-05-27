@@ -29,69 +29,37 @@ namespace tcp_server_gui
         /// </summary>
         private void InitializeComponent()
         {
-            this.listchat = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txtMsg = new System.Windows.Forms.TextBox();
-            this.lblIP = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // listchat
+            // label2
             // 
-            this.listchat.FormattingEnabled = true;
-            this.listchat.ItemHeight = 16;
-            this.listchat.Location = new System.Drawing.Point(12, 184);
-            this.listchat.Name = "listchat";
-            this.listchat.Size = new System.Drawing.Size(745, 244);
-            this.listchat.TabIndex = 7;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(37, 110);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(291, 36);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "You are listening ...";
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(12, 9);
+            this.lblTitle.Location = new System.Drawing.Point(37, 26);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(108, 36);
-            this.lblTitle.TabIndex = 6;
-            this.lblTitle.Text = "Server";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(328, 141);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Send";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtMsg
-            // 
-            this.txtMsg.Location = new System.Drawing.Point(12, 141);
-            this.txtMsg.Name = "txtMsg";
-            this.txtMsg.Size = new System.Drawing.Size(310, 22);
-            this.txtMsg.TabIndex = 4;
-            // 
-            // lblIP
-            // 
-            this.lblIP.AutoSize = true;
-            this.lblIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIP.Location = new System.Drawing.Point(12, 63);
-            this.lblIP.Name = "lblIP";
-            this.lblIP.Size = new System.Drawing.Size(72, 36);
-            this.lblIP.TabIndex = 8;
-            this.lblIP.Text = "IP : ";
+            this.lblTitle.Size = new System.Drawing.Size(268, 36);
+            this.lblTitle.TabIndex = 5;
+            this.lblTitle.Text = "This is the server!";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lblIP);
-            this.Controls.Add(this.listchat);
+            this.ClientSize = new System.Drawing.Size(376, 190);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.txtMsg);
             this.Name = "Form1";
             this.Text = "Server Form";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -102,11 +70,8 @@ namespace tcp_server_gui
 
         #endregion
 
-        private System.Windows.Forms.ListBox listchat;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtMsg;
-        private System.Windows.Forms.Label lblIP;
     }
 }
 

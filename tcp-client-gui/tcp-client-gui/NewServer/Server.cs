@@ -103,6 +103,8 @@ namespace tcp_client_gui.NewServer
 
                 if (data.IndexOf("<EOF>") > -1)
                 {
+                    string msg = data.Substring(0,data.Length - data.IndexOf("<EOF>")-5);
+                    Console.WriteLine(msg);
                     Console.WriteLine("From " + (((IPEndPoint)sender).Address.ToString() ?? "-")
                         + " : " + data);
 
@@ -126,5 +128,27 @@ namespace tcp_client_gui.NewServer
             clientSocket.Close();
         }
 
+    }
+    public struct PeerDetail
+    {
+        public PeerDetail(string ip, string username)
+        {
+            this.ipAddress = ip;
+            this.username = username;
+        }
+
+        public readonly string ipAddress;
+        public readonly string username;
+
+        public IPAddress GetIPAddress()
+        {
+            return IPAddress.Parse(this.ipAddress);
+        }
+    }
+    public struct ChatRow
+    {
+        public PeerDetail from;
+        public PeerDetail to;
+        public string message;
     }
 }

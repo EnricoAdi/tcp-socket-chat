@@ -1,25 +1,24 @@
 ﻿using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
-using System.Net.Sockets; 
+using System.Net.Sockets;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms; 
+using System.Windows.Forms;
 using System.Timers;
 
-namespace tcp_client_gui
+namespace tcp_server_gui
 {
     class IPHelper
-    {
-
-        public byte[] MsgToByte(string msg)
+    { 
+        public static byte[] MsgToByte(string msg)
         {
-            return Encoding.Default.GetBytes(msg);
+            return Encoding.ASCII.GetBytes(msg);
         }
         public static List<IPAddressDetail> GetInterfaceIPAddress(bool debug = false)
         {
@@ -97,5 +96,6 @@ namespace tcp_client_gui
         public string broadcast;
         public string mask;
         public UnicastIPAddressInformation unicast;
+
     }
 }

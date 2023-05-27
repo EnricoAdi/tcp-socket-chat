@@ -37,6 +37,8 @@ namespace tcp_client_gui
             this.label3 = new System.Windows.Forms.Label();
             this.txtIP = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtIPTo = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -108,15 +110,33 @@ namespace tcp_client_gui
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(421, 131);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(124, 17);
+            this.label4.Size = new System.Drawing.Size(170, 17);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Type IP Manually: ";
+            this.label4.Text = "Type IP Server Manually: ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(423, 202);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(49, 17);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "IP To :";
+            // 
+            // txtIPTo
+            // 
+            this.txtIPTo.Location = new System.Drawing.Point(426, 226);
+            this.txtIPTo.Name = "txtIPTo";
+            this.txtIPTo.Size = new System.Drawing.Size(155, 22);
+            this.txtIPTo.TabIndex = 11;
             // 
             // MainMenuClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 363);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtIPTo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtIP);
             this.Controls.Add(this.label3);
@@ -144,5 +164,7 @@ namespace tcp_client_gui
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtIP;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtIPTo;
     }
 }

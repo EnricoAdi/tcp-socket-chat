@@ -15,19 +15,23 @@ namespace tcp_client_gui
 {
     public partial class FormChatClient : Form
     {
-        public FormChatClient(string uname, string ipChoose, int portChoose)
+        public FormChatClient(string uname, string ipChoose, int portChoose, string ipTo)
         {
             InitializeComponent(); 
             name = uname;
             try
             {
-                ip = IPAddress.Parse(ipChoose);
+                ipServer = IPAddress.Parse(ipChoose);
+                ipTujuan = ipTo;
+                txtTo.Text = ipTo;
                 port = portChoose;
             }
             catch (Exception)
             {
 
-                ip = IPAddress.Parse(defaultIP);
+                ipServer = IPAddress.Parse(defaultIP);
+                ipTujuan = defaultIP;
+                txtTo.Text = ipTo;
                 port = 11111;
             }
         }
@@ -35,7 +39,10 @@ namespace tcp_client_gui
         string defaultIP = "192.168.1.5";
         Socket sck;
         int port = 11111;
-        IPAddress ip;
+        IPAddress ipServer;
+
+        string ipTujuan;
+
         Thread rec;
         string name = ""; 
 
@@ -50,14 +57,23 @@ namespace tcp_client_gui
         }
         public void addChat(string msg)
         {
-            listchat.Items.Add(msg); 
+            if (msg != "")
+            { 
+                listchat.Items.Insert(0, msg);
+            }
         }
 
         void sendChat(string message)
         {
             //byte[] sdata = Encoding.Default.GetBytes("<" + name + ">" + message);
-            byte[] sdata = Encoding.Default.GetBytes(name + ":" + message+"<EOF>");
-            sck.Send(sdata, 0, sdata.Length, 0); 
+            //byte[] sdata = Encoding.Default.GetBytes($"<USERNAMESENDER>{name}<MESSAGE>{message}<EOF>{ipTujuan}");
+            byte[] sdata = Encoding.Default.GetBytes($"SEND|{name}|{message}|{txtTo.Text}<EOF>");
+            sck.Send(sdata, 0, sdata.Length, 0);
+        }
+        void endChat(string message)
+        { 
+            byte[] sdata = Encoding.Default.GetBytes($"BYE|{name}|{message}|{txtTo.Text}<EOF>");
+            sck.Send(sdata, 0, sdata.Length, 0);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -68,13 +84,13 @@ namespace tcp_client_gui
             try
             {
 
-            sck.Connect(new IPEndPoint(ip, port));
+            sck.Connect(new IPEndPoint(ipServer, port));
 
             rec.Start();
 
             //byte[] conmsg = Encoding.Default.GetBytes("<" + name + ">" + "Connected");
-            byte[] conmsg = MsgToByte( name + " Connected");
-            sck.Send(conmsg, 0, conmsg.Length, 0);
+            //byte[] conmsg = MsgToByte( name + " Connected");
+            //sck.Send(conmsg, 0, conmsg.Length, 0);
 
             }
             catch (Exception)
@@ -87,10 +103,6 @@ namespace tcp_client_gui
              
         }
 
-        public byte[] MsgToByte(string msg)
-        {
-            return Encoding.Default.GetBytes(msg);
-        }
 
 
         private void recV()
@@ -105,10 +117,13 @@ namespace tcp_client_gui
                     Array.Resize(ref Buffer, rec);
 
                     string msgGet = Encoding.Default.GetString(Buffer);
-                    Console.WriteLine(msgGet); 
+                    if (msgGet != "")
+                    {
+                        Console.WriteLine(msgGet); 
 
-                    //buat akses form 
-                    this.Invoke(new Action(() => this.addChat(msgGet)));
+                        //buat akses form 
+                        this.Invoke(new Action(() => this.addChat(msgGet))); 
+                    }
 
                 }
             }
@@ -116,12 +131,13 @@ namespace tcp_client_gui
             {
                 MessageBox.Show("Disconnected");
 
-                this.Close(); 
+                //this.Close(); 
             }
         }
 
         private void FormChatClient_FormClosed(object sender, FormClosedEventArgs e)
         {
+            endChat("end");
             MainMenuClient m = new MainMenuClient();
             m.Show();
         }
