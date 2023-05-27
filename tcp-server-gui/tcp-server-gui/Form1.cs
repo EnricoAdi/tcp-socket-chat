@@ -200,27 +200,25 @@ namespace tcp_server_gui
                 {
                     //resiko kalo ngechat dari pc server :")
 
-                    string originalMsg = data;
-
+                    string originalMsg = data; 
 
                     string[] arr = originalMsg.Split('|');
                     string action = arr[0]; //SEND
                     string usernameSender = arr[1];
                     string msg = arr[2];
 
-                    int idx = -1;
+                    int idxCariUsername = -1;
                     for (int i = 0; i < Form1.listSocket.Count; i++)
                     {
                         SocketListener o = Form1.listSocket[i];
 
                         if (o.lockIp == ipsender)
                         {
-                            idx = i;
+                            idxCariUsername = i;
                         }
                     }
 
-                    Form1.listSocket[idx].username = usernameSender;
-
+                    Form1.listSocket[idxCariUsername].username = usernameSender; 
                 }
             }
              
