@@ -80,12 +80,13 @@ namespace tcp_client_gui
 
             sck.Connect(new IPEndPoint(ipServer, port));
 
+                //buat handshake ack
+            byte[] condata = Encoding.Default.GetBytes($"HELLO|{name}|START|192.168.1.1:1000");
+            
+            sck.Send(condata, 0, condata.Length, 0);
+
             rec.Start(); 
 
-                //buat handshake ack
-            byte[] sdata = Encoding.Default.GetBytes($"HELLO|{name}|START|192.168.1.1:1000");
-            
-            sck.Send(sdata, 0, sdata.Length, 0);
 
             }
             catch (Exception)

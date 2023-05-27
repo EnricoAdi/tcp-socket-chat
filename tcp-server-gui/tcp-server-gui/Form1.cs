@@ -73,7 +73,7 @@ namespace tcp_server_gui
                     {
                         SocketListener o = Form1.listSocket[i];
 
-                        Console.WriteLine($" ({Form1.listSocket.Count}) IP - PORT : {o.lockIp} - {o.port}");
+                        Console.WriteLine($" ({i+1}) USERNAME - IP - PORT : {o.username} - {o.lockIp} - {o.port}");
 
                     }
                     Console.WriteLine("--- END LIST CLIENT---");
@@ -93,7 +93,7 @@ namespace tcp_server_gui
         public Socket clientSocket;
         public string lockIp;
         public int port;
-        public string username;
+        public string username = "";
 
         public SocketListener(Socket clientSocket, string ipParam,int portParam)
         {
@@ -123,18 +123,17 @@ namespace tcp_server_gui
                 //    //clientSocket.Send(Encoding.ASCII.GetBytes("\nPong : " + data + "\n"));
                 //    data = "";
                 //}
-
-                string originalMsg = data.Substring(0, data.IndexOf("<EOF>"));
-                      
-
-                string[] arr = originalMsg.Split('|');
-                string action = arr[0]; //SEND
-                string usernameSender = arr[1]; 
-                string msg = arr[2]; 
+                 
                 string ipsender = ((IPEndPoint)sender).Address.ToString();
 
                 if (data.IndexOf("<EOF>") > -1)
                 { 
+                    string originalMsg = data.Substring(0, data.IndexOf("<EOF>")); 
+
+                    string[] arr = originalMsg.Split('|');
+                    string action = arr[0]; //SEND
+                    string usernameSender = arr[1];
+                    string msg = arr[2];
 
                     string ipReceive = arr[3];
                     string[] ipReceiveOriginArr = ipReceive.Split(':');
@@ -158,11 +157,15 @@ namespace tcp_server_gui
                     for (int i = 0; i < Form1.listSocket.Count; i++)
                     {
                         SocketListener o = Form1.listSocket[i];
-                        //Console.WriteLine(portReceiveOrigin + " - "+o.port.ToString()); 
-                        
-                        if (o.lockIp == ipReceiveOrigin && o.port.ToString()==portReceiveOrigin)
+                        Console.WriteLine(ipReceiveOrigin + " - " + o.lockIp.ToString());
+
+                        //if (o.lockIp == ipReceiveOrigin && o.port.ToString()==portReceiveOrigin)
+                        //{
+                        //    idx = i;
+                        //} 
+                        if (o.lockIp == ipReceiveOrigin)
                         {
-                            idx = i; 
+                            idx = i;
                         }
                     }
                     if (idx != -1)
@@ -196,6 +199,14 @@ namespace tcp_server_gui
                 else
                 {
                     //resiko kalo ngechat dari pc server :")
+
+                    string originalMsg = data;
+
+
+                    string[] arr = originalMsg.Split('|');
+                    string action = arr[0]; //SEND
+                    string usernameSender = arr[1];
+                    string msg = arr[2];
 
                     int idx = -1;
                     for (int i = 0; i < Form1.listSocket.Count; i++)
