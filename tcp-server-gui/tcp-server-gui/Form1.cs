@@ -23,8 +23,7 @@ namespace tcp_server_gui
         public static List<SocketListener> listSocket = new List<SocketListener>();
         
         int port = 11111; 
-
-        string name;
+         
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -68,9 +67,16 @@ namespace tcp_server_gui
                     int port = Int32.Parse(pembanding[1]);
                     SocketListener obj = new SocketListener(clientSocket, pembanding[0], port);
 
-                    Console.WriteLine($"REGISTER CLIENT WITH IP - PORT ({Form1.listSocket.Count + 1}) : {pembanding[0]} - "+pembanding[1]);
-
                     Form1.listSocket.Add(obj);
+                    Console.WriteLine("---LIST CLIENT---");
+                    for (int i = 0; i < Form1.listSocket.Count; i++)
+                    {
+                        SocketListener o = Form1.listSocket[i];
+
+                        Console.WriteLine($" ({Form1.listSocket.Count}) IP - PORT : {o.lockIp} - {o.port}");
+
+                    }
+                    Console.WriteLine("--- END LIST CLIENT---");
 
                     Thread tr = new Thread(new ThreadStart(obj.newClient)); 
                     tr.Start();
@@ -84,9 +90,10 @@ namespace tcp_server_gui
     }
     public class SocketListener
     {
-        private Socket clientSocket;
-        private string lockIp;
-        private int port;
+        public Socket clientSocket;
+        public string lockIp;
+        public int port;
+        public string username;
 
         public SocketListener(Socket clientSocket, string ipParam,int portParam)
         {
@@ -117,41 +124,41 @@ namespace tcp_server_gui
                 //    data = "";
                 //}
 
-                if (data.IndexOf("<EOF>") > -1)
-                { 
-                    string originalMsg = data.Substring(0, data.IndexOf("<EOF>"));
+                string originalMsg = data.Substring(0, data.IndexOf("<EOF>"));
                       
 
-                    string[] arr = originalMsg.Split('|');
-                    string action = arr[0]; //SEND
-                    string usernameSender = arr[1]; 
-                    string msg = arr[2]; 
+                string[] arr = originalMsg.Split('|');
+                string action = arr[0]; //SEND
+                string usernameSender = arr[1]; 
+                string msg = arr[2]; 
+                string ipsender = ((IPEndPoint)sender).Address.ToString();
+
+                if (data.IndexOf("<EOF>") > -1)
+                { 
 
                     string ipReceive = arr[3];
                     string[] ipReceiveOriginArr = ipReceive.Split(':');
 
                     string ipReceiveOrigin = ipReceiveOriginArr[0];
                     string portReceiveOrigin = ipReceiveOriginArr[1];
-                    string ipsender = ((IPEndPoint)sender).Address.ToString();
 
                     //Console.WriteLine("------------");
                     //Console.WriteLine($"ACTION : {action}");
                     //Console.WriteLine(usernameSender);
                     //Console.WriteLine(ipsender);
                     //Console.WriteLine(ipReceive);
-                    //Console.WriteLine(msg); 
-
+                    //Console.WriteLine(msg);  
                     //Console.WriteLine("------------");
+
                     Console.WriteLine($"FROM {ipsender} to {ipReceiveOrigin} : {msg} ");
 
                     //send to received ip
-
-                    string prt = "11111";
+                     
                     int idx = -1;   
                     for (int i = 0; i < Form1.listSocket.Count; i++)
                     {
                         SocketListener o = Form1.listSocket[i];
-                        Console.WriteLine(portReceiveOrigin + " - "+o.port.ToString()); 
+                        //Console.WriteLine(portReceiveOrigin + " - "+o.port.ToString()); 
                         
                         if (o.lockIp == ipReceiveOrigin && o.port.ToString()==portReceiveOrigin)
                         {
@@ -163,7 +170,7 @@ namespace tcp_server_gui
                         IPAddress rcvIp = IPAddress.Parse(ipReceiveOrigin);
                         IPEndPoint responsetarget = new IPEndPoint(rcvIp, Int32.Parse(portReceiveOrigin)); 
 
-                        Form1.listSocket[idx].clientSocket.SendTo(IPHelper.MsgToByte(msg), responsetarget);
+                        Form1.listSocket[idx].clientSocket.SendTo(IPHelper.MsgToByte($"{usernameSender} :"+msg), responsetarget);
                     }
                     else
                     {
@@ -172,14 +179,36 @@ namespace tcp_server_gui
 
                     if (action == "BYE")
                     {
+                        for (int i = 0; i < Form1.listSocket.Count; i++)
+                        {
+                            SocketListener o = Form1.listSocket[i]; 
 
+                            if (o.lockIp == ipsender)
+                            {
+                                idx = i;
+                            }
+                        }
+                        Form1.listSocket.RemoveAt(idx); 
                         break;
-                    }
-
+                    } 
                     data = null;
                 }
                 else
                 {
+                    //resiko kalo ngechat dari pc server :")
+
+                    int idx = -1;
+                    for (int i = 0; i < Form1.listSocket.Count; i++)
+                    {
+                        SocketListener o = Form1.listSocket[i];
+
+                        if (o.lockIp == ipsender)
+                        {
+                            idx = i;
+                        }
+                    }
+
+                    Form1.listSocket[idx].username = usernameSender;
 
                 }
             }
