@@ -157,7 +157,7 @@ namespace tcp_server_gui
                     for (int i = 0; i < Form1.listSocket.Count; i++)
                     {
                         SocketListener o = Form1.listSocket[i];
-                        Console.WriteLine(ipReceiveOrigin + " - " + o.lockIp.ToString());
+                        //Console.WriteLine(ipReceiveOrigin + " - " + o.lockIp.ToString());
 
                         //if (o.lockIp == ipReceiveOrigin && o.port.ToString()==portReceiveOrigin)
                         //{

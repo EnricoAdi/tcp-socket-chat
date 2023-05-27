@@ -75,7 +75,7 @@ namespace tcp_client_gui
             // 
             // txtTo
             // 
-            this.txtTo.Location = new System.Drawing.Point(83, 62);
+            this.txtTo.Location = new System.Drawing.Point(122, 65);
             this.txtTo.Name = "txtTo";
             this.txtTo.Size = new System.Drawing.Size(227, 22);
             this.txtTo.TabIndex = 4;
@@ -85,9 +85,9 @@ namespace tcp_client_gui
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 65);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 17);
+            this.label1.Size = new System.Drawing.Size(68, 17);
             this.label1.TabIndex = 5;
-            this.label1.Text = "IP:port ";
+            this.label1.Text = "IP Tujuan";
             // 
             // FormChatClient
             // 
