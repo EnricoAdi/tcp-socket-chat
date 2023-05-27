@@ -34,6 +34,7 @@ namespace tcp_client_gui
             this.lblTitle = new System.Windows.Forms.Label();
             this.listchat = new System.Windows.Forms.ListBox();
             this.txtTo = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtMsg
@@ -74,16 +75,26 @@ namespace tcp_client_gui
             // 
             // txtTo
             // 
-            this.txtTo.Location = new System.Drawing.Point(18, 71);
+            this.txtTo.Location = new System.Drawing.Point(83, 62);
             this.txtTo.Name = "txtTo";
-            this.txtTo.Size = new System.Drawing.Size(310, 22);
+            this.txtTo.Size = new System.Drawing.Size(227, 22);
             this.txtTo.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 65);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 17);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "IP:port ";
             // 
             // FormChatClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(822, 524);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTo);
             this.Controls.Add(this.listchat);
             this.Controls.Add(this.lblTitle);
@@ -105,6 +116,7 @@ namespace tcp_client_gui
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.ListBox listchat;
         private System.Windows.Forms.TextBox txtTo;
+        private System.Windows.Forms.Label label1;
     }
 }
 

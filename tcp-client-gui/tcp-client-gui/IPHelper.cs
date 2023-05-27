@@ -17,9 +17,9 @@ namespace tcp_client_gui
     class IPHelper
     {
 
-        public byte[] MsgToByte(string msg)
+        public static byte[] MsgToByte(string msg)
         {
-            return Encoding.Default.GetBytes(msg);
+            return Encoding.ASCII.GetBytes(msg);
         }
         public static List<IPAddressDetail> GetInterfaceIPAddress(bool debug = false)
         {
