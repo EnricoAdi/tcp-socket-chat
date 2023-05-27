@@ -26,15 +26,14 @@ namespace tcp_client_gui
 
             string choosePartner = txtIP.Text.ToString();
             string username = txtUsername.Text;
-            int port = 11111;
-            string iptujuan = txtIPTo.Text;
+            int port = 11111; 
             if (username == "" || choosePartner=="")
             {
                 MessageBox.Show("Username dan partner harus diisi");
                 return;
             }
 
-            FormChatClient f = new FormChatClient(username, choosePartner, port,iptujuan);
+            FormChatClient f = new FormChatClient(username, choosePartner, port);
             f.Show();
             this.Hide();
             
@@ -81,8 +80,7 @@ namespace tcp_client_gui
 
         private void listPartner_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtIP.Text = listPartner.SelectedItem.ToString();
-            txtIPTo.Text = listPartner.SelectedItem.ToString();
+            txtIP.Text = listPartner.SelectedItem.ToString(); 
         }
 
  

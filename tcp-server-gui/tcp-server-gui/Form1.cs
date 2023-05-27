@@ -68,7 +68,7 @@ namespace tcp_server_gui
                     int port = Int32.Parse(pembanding[1]);
                     SocketListener obj = new SocketListener(clientSocket, pembanding[0], port);
 
-                    Console.WriteLine($"INI PORT : {Form1.listSocket.Count+1} : "+pembanding[1]);
+                    Console.WriteLine($"REGISTER CLIENT WITH IP - PORT ({Form1.listSocket.Count + 1}) : {pembanding[0]} - "+pembanding[1]);
 
                     Form1.listSocket.Add(obj);
 
@@ -103,8 +103,7 @@ namespace tcp_server_gui
             string data = null;
 
             while (true)
-            {
-                Console.WriteLine("baru");
+            { 
                 EndPoint sender = clientSocket.RemoteEndPoint;
 
                 int numByte = clientSocket.Receive(bytes);
@@ -121,12 +120,7 @@ namespace tcp_server_gui
                 if (data.IndexOf("<EOF>") > -1)
                 { 
                     string originalMsg = data.Substring(0, data.IndexOf("<EOF>"));
-
-                    //example  <USERNAMESENDER>asd<MESSAGE>asd<EOF>10.10.3.18 
-                    //string username = originalMsg.Substring(16,originalMsg.Length-data.IndexOf("<MESSAGE>"));
-                    //string ipsender = ((IPEndPoint)sender).Address.ToString();
-                    //string ipReceive = data.Substring(data.IndexOf("<EOF>")+5);
-                    //string msg = originalMsg.Substring(originalMsg.IndexOf("<MESSAGE>") + 9, originalMsg.Length - (originalMsg.IndexOf("<MESSAGE>") + 9));
+                      
 
                     string[] arr = originalMsg.Split('|');
                     string action = arr[0]; //SEND
@@ -135,21 +129,20 @@ namespace tcp_server_gui
 
                     string ipReceive = arr[3];
                     string[] ipReceiveOriginArr = ipReceive.Split(':');
+
                     string ipReceiveOrigin = ipReceiveOriginArr[0];
                     string portReceiveOrigin = ipReceiveOriginArr[1];
-                    string ipsender = ((IPEndPoint)sender).Address.ToString();  
+                    string ipsender = ((IPEndPoint)sender).Address.ToString();
 
-                    Console.WriteLine("------------");
-                    Console.WriteLine($"ACTION : {action}");
-                    Console.WriteLine(usernameSender);
-                    Console.WriteLine(ipsender);
-                    Console.WriteLine(ipReceive);
-                    Console.WriteLine(msg); 
+                    //Console.WriteLine("------------");
+                    //Console.WriteLine($"ACTION : {action}");
+                    //Console.WriteLine(usernameSender);
+                    //Console.WriteLine(ipsender);
+                    //Console.WriteLine(ipReceive);
+                    //Console.WriteLine(msg); 
 
-                    Console.WriteLine("------------");
-
-                    //Console.WriteLine("From " + (((IPEndPoint)sender).Address.ToString() ?? "-")  + " : " + data);
-                    //clientSocket.Send(Encoding.ASCII.GetBytes("\nPong : " + data + "\n"));
+                    //Console.WriteLine("------------");
+                    Console.WriteLine($"FROM {ipsender} to {ipReceiveOrigin} : {msg} ");
 
                     //send to received ip
 
@@ -168,8 +161,8 @@ namespace tcp_server_gui
                     if (idx != -1)
                     {
                         IPAddress rcvIp = IPAddress.Parse(ipReceiveOrigin);
-                        IPEndPoint responsetarget = new IPEndPoint(rcvIp, Int32.Parse(portReceiveOrigin));
-                        clientSocket.SendTo(IPHelper.MsgToByte(msg), responsetarget);
+                        IPEndPoint responsetarget = new IPEndPoint(rcvIp, Int32.Parse(portReceiveOrigin)); 
+
                         Form1.listSocket[idx].clientSocket.SendTo(IPHelper.MsgToByte(msg), responsetarget);
                     }
                     else
@@ -179,15 +172,18 @@ namespace tcp_server_gui
 
                     if (action == "BYE")
                     {
+
                         break;
                     }
 
                     data = null;
                 }
-            }
+                else
+                {
 
-            //Console.WriteLine("Text received -> {0} ", data);
-            //byte[] message = Encoding.ASCII.GetBytes("\nTest Server");
+                }
+            }
+             
 
             // Send a message to Client
             // using Send() method

@@ -152,8 +152,7 @@ namespace tcp_client_gui.NewServer
                     //clientSocket.Send(Encoding.ASCII.GetBytes("\nPong : " + data + "\n"));
 
                     //send to received ip
-
-                    string prt = "11111";
+                     
                     int idx = -1;
                     for (int i = 0; i < Server.listSocket.Count; i++)
                     {

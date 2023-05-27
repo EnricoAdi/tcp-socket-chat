@@ -83,7 +83,7 @@ namespace tcp_client_gui
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 65);
+            this.label1.Location = new System.Drawing.Point(15, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 17);
             this.label1.TabIndex = 5;

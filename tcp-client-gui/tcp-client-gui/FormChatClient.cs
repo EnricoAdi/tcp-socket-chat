@@ -15,23 +15,19 @@ namespace tcp_client_gui
 {
     public partial class FormChatClient : Form
     {
-        public FormChatClient(string uname, string ipChoose, int portChoose, string ipTo)
+        public FormChatClient(string uname, string ipChoose, int portChoose)
         {
             InitializeComponent(); 
             name = uname;
             try
             {
-                ipServer = IPAddress.Parse(ipChoose);
-                ipTujuan = ipTo;
-                txtTo.Text = ipTo;
+                ipServer = IPAddress.Parse(ipChoose); 
                 port = portChoose;
             }
             catch (Exception)
-            {
-
+            { 
                 ipServer = IPAddress.Parse(defaultIP);
-                ipTujuan = defaultIP;
-                txtTo.Text = ipTo;
+                ipTujuan = defaultIP; 
                 port = 11111;
             }
         }
@@ -64,15 +60,13 @@ namespace tcp_client_gui
         }
 
         void sendChat(string message)
-        {
-            //byte[] sdata = Encoding.Default.GetBytes("<" + name + ">" + message);
-            //byte[] sdata = Encoding.Default.GetBytes($"<USERNAMESENDER>{name}<MESSAGE>{message}<EOF>{ipTujuan}");
+        { 
             byte[] sdata = Encoding.Default.GetBytes($"SEND|{name}|{message}|{txtTo.Text}<EOF>");
             sck.Send(sdata, 0, sdata.Length, 0);
         }
-        void endChat(string message)
+        void endChat()
         { 
-            byte[] sdata = Encoding.Default.GetBytes($"BYE|{name}|{message}|{txtTo.Text}<EOF>");
+            byte[] sdata = Encoding.Default.GetBytes($"BYE|{name}|END|{txtTo.Text}<EOF>");
             sck.Send(sdata, 0, sdata.Length, 0);
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -88,9 +82,7 @@ namespace tcp_client_gui
 
             rec.Start();
 
-            //byte[] conmsg = Encoding.Default.GetBytes("<" + name + ">" + "Connected");
-            //byte[] conmsg = MsgToByte( name + " Connected");
-            //sck.Send(conmsg, 0, conmsg.Length, 0);
+ 
 
             }
             catch (Exception)
@@ -101,9 +93,7 @@ namespace tcp_client_gui
                 m.Show();
             }
              
-        }
-
-
+        } 
 
         private void recV()
         {
@@ -129,15 +119,13 @@ namespace tcp_client_gui
             }
             catch (Exception)
             {
-                MessageBox.Show("Disconnected");
-
-                //this.Close(); 
+                MessageBox.Show("Disconnected"); 
             }
         }
 
         private void FormChatClient_FormClosed(object sender, FormClosedEventArgs e)
         {
-            endChat("end");
+            endChat();
             MainMenuClient m = new MainMenuClient();
             m.Show();
         }
