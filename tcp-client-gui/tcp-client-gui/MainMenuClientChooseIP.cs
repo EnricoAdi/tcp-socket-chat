@@ -14,9 +14,9 @@ using System.Timers;
 
 namespace tcp_client_gui
 {
-    public partial class MainMenuClient : Form
+    public partial class MainMenuClientChooseIP : Form
     {
-        public MainMenuClient()
+        public MainMenuClientChooseIP()
         {
             InitializeComponent();
         }
@@ -24,19 +24,47 @@ namespace tcp_client_gui
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string choosePartner = txtIP.Text.ToString();
+            Socket sck;
+            string chooseServer = txtIP.Text.ToString();
             string username = txtUsername.Text;
             int port = 11111; 
-            if (username == "" || choosePartner=="")
+            if (username == "" || chooseServer == "")
             {
-                MessageBox.Show("Username dan partner harus diisi");
+                MessageBox.Show("Username dan server harus diisi");
+                return;
+            } 
+
+            //FormChatClient f = new FormChatClient(username, choosePartner, port);
+            //f.Show();
+            //this.Hide();
+
+            sck = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            try
+            {
+                IPAddress ipServer = IPAddress.Parse(chooseServer);
+
+                sck.Connect(new IPEndPoint(ipServer, port));
+
+                //buat handshake ack
+                byte[] condata = IPHelper.MsgToByte($"HELLO|{username}|START|192.168.1.1:11111<EOF>");
+
+                sck.Send(condata, 0, condata.Length, 0);
+
+
+                SocketClient.socket = sck;
+                SocketClient.username = username;
+
+                MainMenuClientChooseTujuan m = new MainMenuClientChooseTujuan();
+                m.Show();
+                this.Hide(); 
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Failed to connect");
                 return;
             }
-
-            FormChatClient f = new FormChatClient(username, choosePartner, port);
-            f.Show();
-            this.Hide();
-            
 
         }
 
@@ -65,8 +93,7 @@ namespace tcp_client_gui
                     if (network != null)
                     { 
                             Console.WriteLine("Addr: {0}   Mask: {1}  Network: {2} Broadcast : {3}", addr.Address, addr.IPv4Mask, network, broadcast);
-
-                            listPartner.Items.Add(addr.Address);
+                         
                     }
                 }
             }
@@ -79,8 +106,7 @@ namespace tcp_client_gui
         }
 
         private void listPartner_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtIP.Text = listPartner.SelectedItem.ToString(); 
+        { 
         }
 
  

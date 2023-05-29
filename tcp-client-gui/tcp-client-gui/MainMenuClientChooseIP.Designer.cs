@@ -1,7 +1,7 @@
 ﻿
 namespace tcp_client_gui
 {
-    partial class MainMenuClient
+    partial class MainMenuClientChooseIP
     {
         /// <summary>
         /// Required designer variable.
@@ -33,8 +33,6 @@ namespace tcp_client_gui
             this.button1 = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.listPartner = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtIP = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -53,7 +51,7 @@ namespace tcp_client_gui
             // 
             this.button1.BackColor = System.Drawing.Color.PaleGreen;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(431, 312);
+            this.button1.Location = new System.Drawing.Point(257, 220);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 39);
             this.button1.TabIndex = 5;
@@ -77,36 +75,17 @@ namespace tcp_client_gui
             this.label2.TabIndex = 6;
             this.label2.Text = "Enter your name";
             // 
-            // listPartner
-            // 
-            this.listPartner.FormattingEnabled = true;
-            this.listPartner.ItemHeight = 16;
-            this.listPartner.Location = new System.Drawing.Point(27, 155);
-            this.listPartner.Name = "listPartner";
-            this.listPartner.Size = new System.Drawing.Size(380, 196);
-            this.listPartner.TabIndex = 7;
-            this.listPartner.SelectedIndexChanged += new System.EventHandler(this.listPartner_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 131);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 17);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Choose Server : ";
-            // 
             // txtIP
             // 
-            this.txtIP.Location = new System.Drawing.Point(426, 179);
+            this.txtIP.Location = new System.Drawing.Point(27, 172);
             this.txtIP.Name = "txtIP";
-            this.txtIP.Size = new System.Drawing.Size(155, 22);
+            this.txtIP.Size = new System.Drawing.Size(380, 22);
             this.txtIP.TabIndex = 9;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(423, 155);
+            this.label4.Location = new System.Drawing.Point(24, 148);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 17);
             this.label4.TabIndex = 10;
@@ -116,11 +95,9 @@ namespace tcp_client_gui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 372);
+            this.ClientSize = new System.Drawing.Size(429, 283);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtIP);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.listPartner);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtUsername);
@@ -140,8 +117,6 @@ namespace tcp_client_gui
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox listPartner;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtIP;
         private System.Windows.Forms.Label label4;
     }

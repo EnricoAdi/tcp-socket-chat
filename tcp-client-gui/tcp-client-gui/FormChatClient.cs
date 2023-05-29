@@ -92,7 +92,7 @@ namespace tcp_client_gui
             {
                 MessageBox.Show("Failed to connect");
                 this.Close();
-                MainMenuClient m = new MainMenuClient();
+                MainMenuClientChooseIP m = new MainMenuClientChooseIP();
                 m.Show();
             }
              
@@ -128,7 +128,7 @@ namespace tcp_client_gui
         private void FormChatClient_FormClosed(object sender, FormClosedEventArgs e)
         {
             endChat();
-            MainMenuClient m = new MainMenuClient();
+            MainMenuClientChooseIP m = new MainMenuClientChooseIP();
             m.Show();
         }
     }

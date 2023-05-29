@@ -41,7 +41,7 @@ namespace tcp_client_gui
             else
             {
                 //client
-                MainMenuClient m = new MainMenuClient();
+                MainMenuClientChooseIP m = new MainMenuClientChooseIP();
                 m.Show();
                 this.Hide();
             }
