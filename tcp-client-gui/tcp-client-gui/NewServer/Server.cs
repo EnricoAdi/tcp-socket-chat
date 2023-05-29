@@ -53,6 +53,7 @@ namespace tcp_client_gui.NewServer
 
                     string[] pembanding = clientSocket.RemoteEndPoint.ToString().Split(':');
                     int port = Int32.Parse(pembanding[1]);
+
                     SocketListener obj = new SocketListener(clientSocket, pembanding[0], port);
 
                     Server.listSocket.Add(obj);
@@ -67,14 +68,14 @@ namespace tcp_client_gui.NewServer
 
                         Console.WriteLine($" ({i + 1}) USERNAME - IP - PORT : {o.username} - {o.lockIp} - {o.port}");
 
-                        listUsername += $"{o.username}-";
-
+                        listUsername += $"{o.username}-"; 
                     }
                     Console.WriteLine("--- END LIST CLIENT---");
 
                     
                     //ngirim list username
                     Thread tr = new Thread(new ThreadStart(obj.newClient));
+
                     clientSocket.Send(IPHelper.MsgToByte(listUsername));
 
                     tr.Start();
@@ -114,8 +115,7 @@ namespace tcp_client_gui.NewServer
         }
 
         public void newClient()
-        {
-
+        { 
             // Data buffer
             byte[] bytes = new Byte[1024];
             string data = null;
@@ -146,41 +146,45 @@ namespace tcp_client_gui.NewServer
                     string ipReceiveOrigin = ipReceiveOriginArr[0];
                     string portReceiveOrigin = ipReceiveOriginArr[1];
 
-                    //Console.WriteLine("------------");
-                    //Console.WriteLine($"ACTION : {action}");
-                    //Console.WriteLine(usernameSender);
-                    //Console.WriteLine(ipsender);
-                    //Console.WriteLine(ipReceive);
-                    //Console.WriteLine(msg);  
-                    //Console.WriteLine("------------");
+                    if (action == "SEND")
+                    { 
+                        //Console.WriteLine("------------");
+                        //Console.WriteLine($"ACTION : {action}");
+                        //Console.WriteLine(usernameSender);
+                        //Console.WriteLine(ipsender);
+                        //Console.WriteLine(ipReceive);
+                        //Console.WriteLine(msg);  
+                        //Console.WriteLine("------------");
 
-                    Console.WriteLine($"FROM {ipsender} to {ipReceiveOrigin} : {msg} ");
+                        Console.WriteLine($"FROM {ipsender} to {ipReceiveOrigin} : {msg} ");
 
-                    //send to received ip
+                        //send to received ip
 
-                    int idx = -1;
-                    for (int i = 0; i < Server.listSocket.Count; i++)
-                    {
-                        SocketListener o = Server.listSocket[i]; 
-                        if (o.lockIp == ipReceiveOrigin)
+                        int idx = -1;
+                        for (int i = 0; i < Server.listSocket.Count; i++)
                         {
-                            idx = i;
+                            SocketListener o = Server.listSocket[i]; 
+                            if (o.lockIp == ipReceiveOrigin)
+                            {
+                                idx = i;
+                            }
                         }
-                    }
-                    if (idx != -1)
-                    {
-                        IPAddress rcvIp = IPAddress.Parse(ipReceiveOrigin);
-                        IPEndPoint responsetarget = new IPEndPoint(rcvIp, Int32.Parse(portReceiveOrigin));
+                        if (idx != -1)
+                        {
+                            IPAddress rcvIp = IPAddress.Parse(ipReceiveOrigin);
+                            IPEndPoint responsetarget = new IPEndPoint(rcvIp, Int32.Parse(portReceiveOrigin));
 
-                        Server.listSocket[idx].clientSocket.SendTo(IPHelper.MsgToByte($"{usernameSender} :" + msg), responsetarget);
-                    }
-                    else
-                    {
-                        clientSocket.Send(IPHelper.MsgToByte("Target not found :(("));
+                            Server.listSocket[idx].clientSocket.SendTo(IPHelper.MsgToByte($"{usernameSender} :" + msg), responsetarget);
+                        }
+                        else
+                        {
+                            clientSocket.Send(IPHelper.MsgToByte("Target not found :(("));
+                        }
                     }
 
                     if (action == "BYE")
                     {
+                        int idx = -1;
                         for (int i = 0; i < Server.listSocket.Count; i++)
                         {
                             SocketListener o = Server.listSocket[i];
@@ -193,36 +197,33 @@ namespace tcp_client_gui.NewServer
                         Server.listSocket.RemoveAt(idx);
                         break;
                     }
+
+                    if (action == "HELLO")
+                    {  
+                        if (action == "HELLO")
+                        {  
+                            int idxCariUsername = -1;
+                            for (int i = 0; i < Server.listSocket.Count; i++)
+                            {
+                                SocketListener o = Server.listSocket[i];
+
+                                if (o.lockIp == ipsender)
+                                {
+                                    idxCariUsername = i;
+                                }
+                            }
+
+                            Server.listSocket[idxCariUsername].username = usernameSender;
+
+                            Server.printListSocket();
+                        }
+                    }
+
                     data = null;
                 }
                 else
                 {
                     //resiko kalo ngechat dari pc server :")
-
-                    string originalMsg = data;
-
-                    string[] arr = originalMsg.Split('|');
-                    string action = arr[0]; //SEND
-
-                    if (action == "HELLO")
-                    { 
-                        string usernameSender = arr[1];
-                        string msg = arr[2];
-                        int idxCariUsername = -1;
-                        for (int i = 0; i < Server.listSocket.Count; i++)
-                        {
-                            SocketListener o = Server.listSocket[i];
-
-                            if (o.lockIp == ipsender)
-                            {
-                                idxCariUsername = i;
-                            }
-                        }
-
-                        Server.listSocket[idxCariUsername].username = usernameSender;
-
-                        Server.printListSocket();
-                    }
                 }
             }
 

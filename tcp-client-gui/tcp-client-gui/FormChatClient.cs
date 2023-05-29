@@ -80,12 +80,12 @@ namespace tcp_client_gui
 
             sck.Connect(new IPEndPoint(ipServer, port));
 
-                //buat handshake ack
-                byte[] condata = Encoding.Default.GetBytes($"HELLO|{name}|START|192.168.1.1:11111");
+            //buat handshake ack
+            byte[] condata = Encoding.Default.GetBytes($"HELLO|{name}|START|192.168.1.1:11111<EOF>");
 
-                sck.Send(condata, 0, condata.Length, 0);
+            sck.Send(condata, 0, condata.Length, 0);
 
-                rec.Start(); 
+            rec.Start(); 
                   
             }
             catch (Exception)
@@ -116,8 +116,7 @@ namespace tcp_client_gui
 
                         //buat akses form 
                         this.Invoke(new Action(() => this.addChat(msgGet))); 
-                    }
-
+                    } 
                 }
             }
             catch (Exception)
