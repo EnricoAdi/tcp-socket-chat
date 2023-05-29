@@ -15,25 +15,24 @@ namespace tcp_client_gui
 {
     public partial class FormChatClient : Form
     {
-        public FormChatClient(string uname, string ipChoose, int portChoose)
+        public FormChatClient()
         {
             InitializeComponent(); 
-            name = uname;
-            try
-            {
-                ipServer = IPAddress.Parse(ipChoose); 
-                port = portChoose;
-            }
-            catch (Exception)
-            { 
-                ipServer = IPAddress.Parse(defaultIP);
-                ipTujuan = defaultIP; 
-                port = 11111;
-            }
+            //name = uname;
+            //try
+            //{
+            //    ipServer = IPAddress.Parse(ipChoose); 
+            //    port = portChoose;
+            //}
+            //catch (Exception)
+            //{ 
+            //    ipServer = IPAddress.Parse(defaultIP);
+            //    ipTujuan = defaultIP; 
+            //    port = 11111;
+            //}
         }
 
-        string defaultIP = "192.168.1.5";
-        Socket sck;
+        string defaultIP = "192.168.1.5"; 
         int port = 11111;
         IPAddress ipServer;
 
@@ -61,31 +60,25 @@ namespace tcp_client_gui
 
         void sendChat(string message)
         { 
-            byte[] sdata = Encoding.Default.GetBytes($"SEND|{name}|{message}|{txtTo.Text}<EOF>");
-            sck.Send(sdata, 0, sdata.Length, 0);
+            byte[] sdata = Encoding.Default.GetBytes($"SEND|{name}|{message}|{SocketClient.usernameTujuan}<EOF>");
+            SocketClient.socket.Send(sdata, 0, sdata.Length, 0);
         }
         void endChat()
         { 
-            byte[] sdata = Encoding.Default.GetBytes($"BYE|{name}|END|{txtTo.Text}<EOF>");
-            sck.Send(sdata, 0, sdata.Length, 0);
+            byte[] sdata = Encoding.Default.GetBytes($"BYE|{name}|END|{SocketClient.usernameTujuan}<EOF>");
+            SocketClient.socket.Send(sdata, 0, sdata.Length, 0);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             lblTitle.Text = "Hello, "+name; 
-            rec = new Thread(recV);
-            sck = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            rec = new Thread(recV); 
 
             try
             {
 
-            sck.Connect(new IPEndPoint(ipServer, port));
+            //sck.Connect(new IPEndPoint(ipServer, port)); 
 
-            //buat handshake ack
-            byte[] condata = Encoding.Default.GetBytes($"HELLO|{name}|START|192.168.1.1:11111<EOF>");
-
-            sck.Send(condata, 0, condata.Length, 0);
-
-            rec.Start(); 
+                rec.Start(); 
                   
             }
             catch (Exception)
@@ -106,7 +99,7 @@ namespace tcp_client_gui
                 {
                     Thread.Sleep(500);
                     byte[] Buffer = new byte[255];
-                    int rec = sck.Receive(Buffer, 0, Buffer.Length, 0);
+                    int rec = SocketClient.socket.Receive(Buffer, 0, Buffer.Length, 0);
                     Array.Resize(ref Buffer, rec);
 
                     string msgGet = Encoding.Default.GetString(Buffer);

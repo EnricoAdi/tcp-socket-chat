@@ -27,11 +27,7 @@ namespace tcp_client_gui
         private void button1_Click(object sender, EventArgs e)
         {
             if (cbbRole.SelectedIndex == 0)
-            {
-                ////server lama
-                //MainMenuServer m = new MainMenuServer();
-                //m.Show();
-                //this.Hide();
+            { 
 
                 Server s = new Server();
                 s.Show();

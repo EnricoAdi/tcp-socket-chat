@@ -85,6 +85,11 @@ namespace tcp_client_gui
         public void pindah(string username)
         {
             SocketClient.usernameTujuan = username;
+
+            FormChatClient f = new FormChatClient();
+            f.Show();
+            this.Hide();
+
         }
         private void listFriend_DoubleClick(object sender, EventArgs e)
         {
@@ -103,6 +108,13 @@ namespace tcp_client_gui
         private void button1_Click(object sender, EventArgs e)
         {
             //connect
+
+            string usernameTerpilih = listFriend.SelectedItem.ToString();
+
+            if (usernameTerpilih != "")
+            {
+                pindah(usernameTerpilih);  
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -141,11 +141,12 @@ namespace tcp_client_gui.NewServer
                     string usernameSender = arr[1];
                     string msg = arr[2];
 
-                    string ipReceive = arr[3];
-                    string[] ipReceiveOriginArr = ipReceive.Split(':');
+                    string usernameReceive = arr[3];
+                    //string usernameReceive = 
+                    //string[] ipReceiveOriginArr = ipReceive.Split(':');
 
-                    string ipReceiveOrigin = ipReceiveOriginArr[0];
-                    string portReceiveOrigin = ipReceiveOriginArr[1];
+                    //string ipReceiveOrigin = ipReceiveOriginArr[0];
+                    //string portReceiveOrigin = ipReceiveOriginArr[1];
 
 
                     if (action == "ASK")
@@ -161,7 +162,7 @@ namespace tcp_client_gui.NewServer
                     }
                     if (action == "SEND")
                     {   
-                        Console.WriteLine($"FROM {ipsender} to {ipReceiveOrigin} : {msg} ");
+                        Console.WriteLine($"FROM {ipsender} to {usernameReceive} : {msg} ");
 
                         //send to received ip
 
@@ -169,15 +170,15 @@ namespace tcp_client_gui.NewServer
                         for (int i = 0; i < Server.listSocket.Count; i++)
                         {
                             SocketListener o = Server.listSocket[i]; 
-                            if (o.lockIp == ipReceiveOrigin)
+                            if (o.username == usernameReceive)
                             {
                                 idx = i;
                             }
                         }
                         if (idx != -1)
                         {
-                            IPAddress rcvIp = IPAddress.Parse(ipReceiveOrigin);
-                            IPEndPoint responsetarget = new IPEndPoint(rcvIp, Int32.Parse(portReceiveOrigin));
+                            IPAddress rcvIp = IPAddress.Parse(Server.listSocket[idx].lockIp);
+                            IPEndPoint responsetarget = new IPEndPoint(rcvIp, Server.listSocket[idx].port);
 
                             Server.listSocket[idx].clientSocket.SendTo(IPHelper.MsgToByte($"{usernameSender} :" + msg), responsetarget);
                         }
