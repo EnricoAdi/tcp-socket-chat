@@ -70,6 +70,7 @@ namespace tcp_client_gui
         private void Form1_Load(object sender, EventArgs e)
         {
             lblTitle.Text = "Hello, "+ SocketClient.username; 
+            lblChatWith.Text = "Chat With : "+ SocketClient.usernameTujuan; 
             rec = new Thread(recV);  
             try
             {  
