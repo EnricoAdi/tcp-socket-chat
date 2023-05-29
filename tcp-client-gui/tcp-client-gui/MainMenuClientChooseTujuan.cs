@@ -25,7 +25,7 @@ namespace tcp_client_gui
             {
                 while (true)
                 {
-                    Thread.Sleep(4000); 
+                    Thread.Sleep(2000); 
                     byte[] msg = IPHelper.MsgToByte($"ASK|{SocketClient.username}|hola|192.168.10.1:11111<EOF>");
 
                     SocketClient.socket.Send(msg, 0, msg.Length, 0);
@@ -44,9 +44,9 @@ namespace tcp_client_gui
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-                MessageBox.Show("Disconnected");
+                MessageBox.Show("Disconnected "+exc.Message.ToString());
             }
         }
         Thread rec;
@@ -98,6 +98,16 @@ namespace tcp_client_gui
             byte[] sdata = Encoding.Default.GetBytes($"BYE|{SocketClient.username}|END|192.168.10.1:11111<EOF>");
             SocketClient.socket.Send(sdata, 0, sdata.Length, 0);
             rec.Abort();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //connect
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //disconnect
         }
     }
 }

@@ -157,8 +157,7 @@ namespace tcp_client_gui.NewServer
                             SocketListener o = Server.listSocket[i];
                             listUsername += $"{o.username}-";
                         }
-                        clientSocket.Send(IPHelper.MsgToByte(listUsername));
-
+                        clientSocket.Send(IPHelper.MsgToByte(listUsername)); 
                     }
                     if (action == "SEND")
                     {   
