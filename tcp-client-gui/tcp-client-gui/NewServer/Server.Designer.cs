@@ -52,6 +52,7 @@ namespace tcp_client_gui.NewServer
             this.label2.Size = new System.Drawing.Size(291, 36);
             this.label2.TabIndex = 4;
             this.label2.Text = "You are listening ...";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Server
             // 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using tcp_client_gui.NewServer;
 namespace tcp_client_gui
 {
     public partial class MainMenu : Form
@@ -33,7 +33,7 @@ namespace tcp_client_gui
                 //m.Show();
                 //this.Hide();
 
-                NewServer.Server s = new NewServer.Server();
+                Server s = new Server();
                 s.Show();
                 this.Hide();
 
