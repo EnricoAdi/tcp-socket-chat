@@ -38,8 +38,7 @@ namespace tcp_client_gui
 
         string ipTujuan;
 
-        Thread rec;
-        string name = ""; 
+        Thread rec; 
 
         private void button1_Click(object sender, EventArgs e)
         { 
@@ -60,17 +59,17 @@ namespace tcp_client_gui
 
         void sendChat(string message)
         { 
-            byte[] sdata = Encoding.Default.GetBytes($"SEND|{name}|{message}|{SocketClient.usernameTujuan}<EOF>");
+            byte[] sdata = Encoding.Default.GetBytes($"SEND|{SocketClient.username}|{message}|{SocketClient.usernameTujuan}<EOF>");
             SocketClient.socket.Send(sdata, 0, sdata.Length, 0);
         }
         void endChat()
         { 
-            byte[] sdata = Encoding.Default.GetBytes($"BYE|{name}|END|{SocketClient.usernameTujuan}<EOF>");
+            byte[] sdata = Encoding.Default.GetBytes($"BYE|{SocketClient.username}|END|{SocketClient.usernameTujuan}<EOF>");
             SocketClient.socket.Send(sdata, 0, sdata.Length, 0);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            lblTitle.Text = "Hello, "+name; 
+            lblTitle.Text = "Hello, "+ SocketClient.username; 
             rec = new Thread(recV);  
             try
             {  
@@ -100,11 +99,10 @@ namespace tcp_client_gui
                     string msgGet = Encoding.Default.GetString(Buffer);
                     if (msgGet != "")
                     {
+                            //buat akses form 
+                        this.Invoke(new Action(() => this.addChat(msgGet)));  
                         if (msgGet.IndexOf("****") < 0)
                         {
-                            //buat akses form 
-                            this.Invoke(new Action(() => this.addChat(msgGet))); 
-
                         }
                     } 
                 }
