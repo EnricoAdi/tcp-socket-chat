@@ -70,7 +70,7 @@ namespace tcp_client_gui
             {
                 listFriend.Items.Clear();
                 string[] listUsername = msg.Split('-'); 
-                if(listUsername.Length > 0 && listUsername[i] == "****")
+                if(listUsername.Length > 0 && listUsername[0] == "****")
                 { 
                     for (int i = 0; i < listUsername.Length; i++)
                     {
