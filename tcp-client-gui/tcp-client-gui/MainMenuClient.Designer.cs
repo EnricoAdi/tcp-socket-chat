@@ -53,7 +53,7 @@ namespace tcp_client_gui
             // 
             this.button1.BackColor = System.Drawing.Color.PaleGreen;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(443, 312);
+            this.button1.Location = new System.Drawing.Point(431, 312);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 39);
             this.button1.TabIndex = 5;
@@ -108,15 +108,15 @@ namespace tcp_client_gui
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(423, 155);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(170, 17);
+            this.label4.Size = new System.Drawing.Size(66, 17);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Type IP Server Manually: ";
+            this.label4.Text = "IP Server";
             // 
             // MainMenuClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 363);
+            this.ClientSize = new System.Drawing.Size(611, 372);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtIP);
             this.Controls.Add(this.label3);

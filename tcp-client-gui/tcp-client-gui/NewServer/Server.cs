@@ -56,23 +56,44 @@ namespace tcp_client_gui.NewServer
                     SocketListener obj = new SocketListener(clientSocket, pembanding[0], port);
 
                     Server.listSocket.Add(obj);
+
                     Console.WriteLine("---LIST CLIENT---");
+
+                    string listUsername = "";
+
                     for (int i = 0; i < Server.listSocket.Count; i++)
                     {
                         SocketListener o = Server.listSocket[i];
 
                         Console.WriteLine($" ({i + 1}) USERNAME - IP - PORT : {o.username} - {o.lockIp} - {o.port}");
 
+                        listUsername += $"{o.username}-";
+
                     }
                     Console.WriteLine("--- END LIST CLIENT---");
 
+                    
+                    //ngirim list username
                     Thread tr = new Thread(new ThreadStart(obj.newClient));
+                    clientSocket.Send(IPHelper.MsgToByte(listUsername));
+
                     tr.Start();
                 }
             }
             catch (Exception exc)
             {
                 Console.WriteLine(exc.ToString());
+            }
+        }
+
+        public static void printListSocket()
+        {
+            for (int i = 0; i < Server.listSocket.Count; i++)
+            {
+                SocketListener o = Server.listSocket[i];
+
+                Console.WriteLine($" ({i + 1}) USERNAME - IP - PORT : {o.username} - {o.lockIp} - {o.port}"); 
+
             }
         }
 
@@ -182,21 +203,26 @@ namespace tcp_client_gui.NewServer
 
                     string[] arr = originalMsg.Split('|');
                     string action = arr[0]; //SEND
-                    string usernameSender = arr[1];
-                    string msg = arr[2];
 
-                    int idxCariUsername = -1;
-                    for (int i = 0; i < Server.listSocket.Count; i++)
-                    {
-                        SocketListener o = Server.listSocket[i];
-
-                        if (o.lockIp == ipsender)
+                    if (action == "HELLO")
+                    { 
+                        string usernameSender = arr[1];
+                        string msg = arr[2];
+                        int idxCariUsername = -1;
+                        for (int i = 0; i < Server.listSocket.Count; i++)
                         {
-                            idxCariUsername = i;
-                        }
-                    }
+                            SocketListener o = Server.listSocket[i];
 
-                    Server.listSocket[idxCariUsername].username = usernameSender;
+                            if (o.lockIp == ipsender)
+                            {
+                                idxCariUsername = i;
+                            }
+                        }
+
+                        Server.listSocket[idxCariUsername].username = usernameSender;
+
+                        Server.printListSocket();
+                    }
                 }
             }
 
