@@ -71,15 +71,10 @@ namespace tcp_client_gui
         private void Form1_Load(object sender, EventArgs e)
         {
             lblTitle.Text = "Hello, "+name; 
-            rec = new Thread(recV); 
-
+            rec = new Thread(recV);  
             try
-            {
-
-            //sck.Connect(new IPEndPoint(ipServer, port)); 
-
-                rec.Start(); 
-                  
+            {  
+                rec.Start();  
             }
             catch (Exception)
             {
@@ -105,10 +100,12 @@ namespace tcp_client_gui
                     string msgGet = Encoding.Default.GetString(Buffer);
                     if (msgGet != "")
                     {
-                        Console.WriteLine(msgGet); 
+                        if (msgGet.IndexOf("****") < 0)
+                        {
+                            //buat akses form 
+                            this.Invoke(new Action(() => this.addChat(msgGet))); 
 
-                        //buat akses form 
-                        this.Invoke(new Action(() => this.addChat(msgGet))); 
+                        }
                     } 
                 }
             }

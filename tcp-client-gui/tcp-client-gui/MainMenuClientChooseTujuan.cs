@@ -70,12 +70,14 @@ namespace tcp_client_gui
             {
                 listFriend.Items.Clear();
                 string[] listUsername = msg.Split('-'); 
-                
-                for (int i = 0; i < listUsername.Length; i++)
-                {
-                    if (listUsername[i] != "" && listUsername[i]!=SocketClient.username)
+                if(listUsername.Length > 0 && listUsername[i] == "****")
+                { 
+                    for (int i = 0; i < listUsername.Length; i++)
                     {
-                        listFriend.Items.Insert(0, listUsername[i]); 
+                        if (listUsername[i] != "****" && listUsername[i]!=SocketClient.username)
+                        {
+                            listFriend.Items.Insert(0, listUsername[i]); 
+                        }
                     }
                 }
                  

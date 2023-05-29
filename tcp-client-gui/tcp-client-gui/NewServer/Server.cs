@@ -151,7 +151,7 @@ namespace tcp_client_gui.NewServer
 
                     if (action == "ASK")
                     {
-                        string listUsername = "";
+                        string listUsername = "****";
 
                         for (int i = 0; i < Server.listSocket.Count; i++)
                         {
