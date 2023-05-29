@@ -88,7 +88,7 @@ namespace tcp_client_gui
         {
             SocketClient.usernameTujuan = username;
 
-            rec.Abort();
+            rec.Suspend();
             FormChatClient f = new FormChatClient();
             f.Show();
             this.Hide();

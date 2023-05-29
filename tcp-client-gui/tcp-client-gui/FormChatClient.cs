@@ -99,11 +99,12 @@ namespace tcp_client_gui
                     string msgGet = Encoding.Default.GetString(Buffer);
                     if (msgGet != "")
                     {
+                        Console.WriteLine("asdd" + msgGet);
                             //buat akses form 
                         this.Invoke(new Action(() => this.addChat(msgGet)));  
-                        if (msgGet.IndexOf("****") < 0)
-                        {
-                        }
+                        //if (msgGet.IndexOf("****") < 0)
+                        //{
+                        //}
                     } 
                 }
             }
