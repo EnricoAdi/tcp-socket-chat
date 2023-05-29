@@ -93,9 +93,9 @@ namespace tcp_client_gui
         }
         private void listFriend_DoubleClick(object sender, EventArgs e)
         {
-            string usernameTerpilih = listFriend.SelectedItem.ToString();
+            //string usernameTerpilih = listFriend.SelectedItem.ToString();
 
-            pindah(usernameTerpilih);
+            //pindah(usernameTerpilih);
         }
 
         private void MainMenuClientChooseTujuan_FormClosed(object sender, FormClosedEventArgs e)
@@ -109,7 +109,7 @@ namespace tcp_client_gui
         {
             //connect
 
-            string usernameTerpilih = listFriend.SelectedItem.ToString();
+            string usernameTerpilih = txtUsername.Text;
 
             if (usernameTerpilih != "")
             {
@@ -120,6 +120,12 @@ namespace tcp_client_gui
         private void button2_Click(object sender, EventArgs e)
         {
             //disconnect
+        }
+
+        private void listFriend_Click(object sender, EventArgs e)
+        { 
+            string usernameTerpilih = listFriend.SelectedItem.ToString();
+            txtUsername.Text = usernameTerpilih;
         }
     }
 }
