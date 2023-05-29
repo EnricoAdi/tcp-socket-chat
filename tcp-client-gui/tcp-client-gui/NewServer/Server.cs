@@ -59,24 +59,21 @@ namespace tcp_client_gui.NewServer
                     Server.listSocket.Add(obj);
 
                     Console.WriteLine("---LIST CLIENT---");
-
-                    string listUsername = "";
+                     
 
                     for (int i = 0; i < Server.listSocket.Count; i++)
                     {
                         SocketListener o = Server.listSocket[i];
 
                         Console.WriteLine($" ({i + 1}) USERNAME - IP - PORT : {o.username} - {o.lockIp} - {o.port}");
-
-                        listUsername += $"{o.username}-"; 
+                          
                     }
                     Console.WriteLine("--- END LIST CLIENT---");
 
                     
                     //ngirim list username
                     Thread tr = new Thread(new ThreadStart(obj.newClient));
-
-                    clientSocket.Send(IPHelper.MsgToByte(listUsername));
+                     
 
                     tr.Start();
                 }
@@ -150,16 +147,21 @@ namespace tcp_client_gui.NewServer
                     string ipReceiveOrigin = ipReceiveOriginArr[0];
                     string portReceiveOrigin = ipReceiveOriginArr[1];
 
-                    if (action == "SEND")
-                    { 
-                        //Console.WriteLine("------------");
-                        //Console.WriteLine($"ACTION : {action}");
-                        //Console.WriteLine(usernameSender);
-                        //Console.WriteLine(ipsender);
-                        //Console.WriteLine(ipReceive);
-                        //Console.WriteLine(msg);  
-                        //Console.WriteLine("------------");
 
+                    if (action == "ASK")
+                    {
+                        string listUsername = "";
+
+                        for (int i = 0; i < Server.listSocket.Count; i++)
+                        {
+                            SocketListener o = Server.listSocket[i];
+                            listUsername += $"{o.username}-";
+                        }
+                        clientSocket.Send(IPHelper.MsgToByte(listUsername));
+
+                    }
+                    if (action == "SEND")
+                    {   
                         Console.WriteLine($"FROM {ipsender} to {ipReceiveOrigin} : {msg} ");
 
                         //send to received ip

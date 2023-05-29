@@ -30,6 +30,8 @@ namespace tcp_client_gui
         private void InitializeComponent()
         {
             this.lblTitle = new System.Windows.Forms.Label();
+            this.listFriend = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -42,14 +44,38 @@ namespace tcp_client_gui
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "Choose Friend ";
             // 
+            // listFriend
+            // 
+            this.listFriend.FormattingEnabled = true;
+            this.listFriend.ItemHeight = 16;
+            this.listFriend.Location = new System.Drawing.Point(18, 68);
+            this.listFriend.Name = "listFriend";
+            this.listFriend.Size = new System.Drawing.Size(690, 340);
+            this.listFriend.TabIndex = 4;
+            this.listFriend.DoubleClick += new System.EventHandler(this.listFriend_DoubleClick);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.PaleGreen;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(558, 436);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 39);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Connect";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // MainMenuClientChooseTujuan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 465);
+            this.ClientSize = new System.Drawing.Size(729, 497);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.listFriend);
             this.Controls.Add(this.lblTitle);
             this.Name = "MainMenuClientChooseTujuan";
             this.Text = "MainMenuClientChooseTujuan";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainMenuClientChooseTujuan_FormClosed);
             this.Load += new System.EventHandler(this.MainMenuClientChooseTujuan_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -59,5 +85,7 @@ namespace tcp_client_gui
         #endregion
 
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.ListBox listFriend;
+        private System.Windows.Forms.Button button1;
     }
 }

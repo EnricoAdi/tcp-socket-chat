@@ -25,7 +25,7 @@ namespace tcp_client_gui
             {
                 while (true)
                 {
-                    Thread.Sleep(1000); 
+                    Thread.Sleep(4000); 
                     byte[] msg = IPHelper.MsgToByte($"ASK|{SocketClient.username}|hola|192.168.10.1:11111<EOF>");
 
                     SocketClient.socket.Send(msg, 0, msg.Length, 0);
@@ -40,7 +40,7 @@ namespace tcp_client_gui
                         Console.WriteLine(msgGet);
 
                         //buat akses form 
-                        //this.Invoke(new Action(() => this.addChat(msgGet)));
+                        this.Invoke(new Action(() => this.addListFriend(msgGet)));
                     }
                 }
             }
@@ -49,11 +49,11 @@ namespace tcp_client_gui
                 MessageBox.Show("Disconnected");
             }
         }
+        Thread rec;
         private void MainMenuClientChooseTujuan_Load(object sender, EventArgs e)
         {
             try
             { 
-                Thread rec;
                 rec = new Thread(recV);
                 rec.Start();
             }
@@ -68,8 +68,36 @@ namespace tcp_client_gui
         {
             if (msg != "")
             {
-                //listchat.Items.Insert(0, msg);
+                listFriend.Items.Clear();
+                string[] listUsername = msg.Split('-'); 
+                
+                for (int i = 0; i < listUsername.Length; i++)
+                {
+                    if (listUsername[i] != "" && listUsername[i]!=SocketClient.username)
+                    {
+                        listFriend.Items.Insert(0, listUsername[i]); 
+                    }
+                }
+                 
             }
+        }
+
+        public void pindah(string username)
+        {
+            SocketClient.usernameTujuan = username;
+        }
+        private void listFriend_DoubleClick(object sender, EventArgs e)
+        {
+            string usernameTerpilih = listFriend.SelectedItem.ToString();
+
+            pindah(usernameTerpilih);
+        }
+
+        private void MainMenuClientChooseTujuan_FormClosed(object sender, FormClosedEventArgs e)
+        { 
+            byte[] sdata = Encoding.Default.GetBytes($"BYE|{SocketClient.username}|END|192.168.10.1:11111<EOF>");
+            SocketClient.socket.Send(sdata, 0, sdata.Length, 0);
+            rec.Abort();
         }
     }
 }

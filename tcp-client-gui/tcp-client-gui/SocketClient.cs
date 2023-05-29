@@ -17,6 +17,8 @@ namespace tcp_client_gui
     { 
         public static Socket socket;
         public static string username = "";
+        public static string usernameTujuan = "";
+
         //PROTOCOL ADA 4 HELLO SEND BYE ASK
     }
 }
