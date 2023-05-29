@@ -74,7 +74,7 @@ namespace tcp_client_gui
                 { 
                     for (int i = 0; i < listUsername.Length; i++)
                     {
-                        if (listUsername[i] != "****" && listUsername[i]!=SocketClient.username)
+                        if (listUsername[i] != "****" && listUsername[i] != "" && listUsername[i]!=SocketClient.username)
                         {
                             listFriend.Items.Insert(0, listUsername[i]); 
                         }
@@ -84,6 +84,7 @@ namespace tcp_client_gui
             }
         }
 
+        [Obsolete]
         public void pindah(string username)
         {
             SocketClient.usernameTujuan = username;
