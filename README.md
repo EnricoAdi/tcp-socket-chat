@@ -29,3 +29,15 @@ If user run as a client, this is the flow how user can send messages to other us
 2. Choose chatting partner
 Right here, the program will provide a list of connected users except the user itself (based on username). The list will updated with delay of 2 seconds.
 
+![image](https://github.com/EnricoAdi/tcp-socket-chat/assets/107124591/c2bcfec8-d614-4285-b75c-c286c97f2ae4)
+
+After selecting a partner, click connect to enter the chat room
+
+3. Now user can chat with the partner, and all of the chat will stored at a listbox. Note that the chat showed at the listbox will be ordered by the newest first
+
+![image](https://github.com/EnricoAdi/tcp-socket-chat/assets/107124591/19cc22d7-a532-42a0-ad2c-9174debd0e07)
+
+The chat will also showed at the log of server
+![image](https://github.com/EnricoAdi/tcp-socket-chat/assets/107124591/41d97c81-eb1a-4bfd-9191-b9ea0311d648)
+ 
+
