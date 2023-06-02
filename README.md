@@ -45,8 +45,7 @@ The chat will also showed at the log of server
 # Code Documentation
 
 ```
- # For Server 
-    
+ # For Server  
             IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddr = IPAddress.Any;
             IPEndPoint localEndPoint = new IPEndPoint(ipAddr, port);
@@ -173,9 +172,7 @@ Right here as can be seen, the server will hold a list of connected client socke
                     }
 
                     if (action == "HELLO")
-                    {  
-                        if (action == "HELLO")
-                        {  
+                    {   
                             int idxCariUsername = -1;
                             for (int i = 0; i < Server.listSocket.Count; i++)
                             {
@@ -189,8 +186,7 @@ Right here as can be seen, the server will hold a list of connected client socke
 
                             Server.listSocket[idxCariUsername].username = usernameSender;
 
-                            Server.printListSocket();
-                        }
+                            Server.printListSocket(); 
                     }
 
                     data = null;
@@ -208,12 +204,10 @@ This protocol will remove the user from list
 
 ```
 # Client's Thread
-
                     Thread.Sleep(500);
                     byte[] Buffer = new byte[255];
                     int rec = SocketClient.socket.Receive(Buffer, 0, Buffer.Length, 0);
                     Array.Resize(ref Buffer, rec);
-
                     string msgGet = Encoding.Default.GetString(Buffer);
                     if (msgGet != "")
                     {
@@ -225,7 +219,6 @@ This code is used to make sure that client is receiving message sent from the se
 this.Invoke is a code to access the form's component from inside a thread
 
 ```
-# Protocol for sending message from client
  void sendChat(string message)
         { 
             byte[] sdata = Encoding.Default.GetBytes($"SEND|{SocketClient.username}|{message}|{SocketClient.usernameTujuan}<EOF>");
