@@ -226,4 +226,4 @@ this.Invoke is a code to access the form's component from inside a thread
         }
 ```
 As described in each protocol before, this is the function used on client to send message to the server.
-Everytime a client send a message, the client will send a message containing a collection of bytes that starts with SEND, and then separated with "|", after that the username, and then the message itself, and then the partner username, and last with <EOF> 
+Everytime a client send a message, the client will send a message containing a collection of bytes that starts with SEND, and then separated with "|", after that the username, and then the message itself, and then the partner username, and ended with ```<EOF>``` 
