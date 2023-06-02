@@ -38,6 +38,9 @@ After selecting a partner, click connect to enter the chat room
 ![image](https://github.com/EnricoAdi/tcp-socket-chat/assets/107124591/19cc22d7-a532-42a0-ad2c-9174debd0e07)
 
 The chat will also showed at the log of server
+
 ![image](https://github.com/EnricoAdi/tcp-socket-chat/assets/107124591/41d97c81-eb1a-4bfd-9191-b9ea0311d648)
- 
+
+
+# Code Documentation
 
