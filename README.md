@@ -44,3 +44,193 @@ The chat will also showed at the log of server
 
 # Code Documentation
 
+```
+ # For Server 
+    
+            IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
+            IPAddress ipAddr = IPAddress.Any;
+            IPEndPoint localEndPoint = new IPEndPoint(ipAddr, port);
+            var ips = IPHelper.GetInterfaceIPAddress();
+            Console.WriteLine(ipHost.HostName + " " + ipAddr.ToString());
+ 
+            Socket listener = new Socket(ipAddr.AddressFamily,
+                         SocketType.Stream, ProtocolType.Tcp);
+                         
+                listener.Bind(localEndPoint);
+
+                listener.Listen(10);
+
+                while (true)
+                {
+                    Console.WriteLine("Waiting connection ... ");
+
+                    Socket clientSocket = listener.Accept();
+
+                    string[] pembanding = clientSocket.RemoteEndPoint.ToString().Split(':');
+                    int port = Int32.Parse(pembanding[1]);
+
+                    SocketListener obj = new SocketListener(clientSocket, pembanding[0], port);
+
+                    Server.listSocket.Add(obj);
+
+                    Console.WriteLine("---LIST CLIENT---");
+                     
+
+                    for (int i = 0; i < Server.listSocket.Count; i++)
+                    {
+                        SocketListener o = Server.listSocket[i];
+
+                        Console.WriteLine($" ({i + 1}) USERNAME - IP - PORT : {o.username} - {o.lockIp} - {o.port}");
+                          
+                    }
+                    Console.WriteLine("--- END LIST CLIENT---");
+
+                    
+                    //send username list
+                    Thread tr = new Thread(new ThreadStart(obj.newClient));
+
+                    tr.Start();
+                }
+```
+Right here as can be seen, the server will hold a list of connected client socket. And for each new client connected, the server will create a new thread for that client.
+
+```
+#This is the protocol of each thread, which will listening to each client everytime a message is sent
+
+ EndPoint sender = clientSocket.RemoteEndPoint;
+
+                int numByte = clientSocket.Receive(bytes);
+
+                data += Encoding.ASCII.GetString(bytes, 0, numByte);
+                 
+
+                string ipsender = ((IPEndPoint)sender).Address.ToString();
+
+                if (data.IndexOf("<EOF>") > -1)
+                {
+                    string originalMsg = data.Substring(0, data.IndexOf("<EOF>"));
+
+                    string[] arr = originalMsg.Split('|');
+                    string action = arr[0];  
+                    string usernameSender = arr[1];
+                    string msg = arr[2];
+
+                    string usernameReceive = arr[3]; 
+
+                    if (action == "ASK")
+                    {
+                        string listUsername = "****-";
+
+                        for (int i = 0; i < Server.listSocket.Count; i++)
+                        {
+                            SocketListener o = Server.listSocket[i];
+                            listUsername += $"{o.username}-";
+                        }
+                        clientSocket.Send(IPHelper.MsgToByte(listUsername)); 
+                    }
+                    if (action == "SEND")
+                    {   
+                        Console.WriteLine($"FROM {ipsender} to {usernameReceive} : {msg} ");
+
+                        //send to received ip
+
+                        int idx = -1;
+                        for (int i = 0; i < Server.listSocket.Count; i++)
+                        {
+                            SocketListener o = Server.listSocket[i]; 
+                            if (o.username == usernameReceive)
+                            {
+                                idx = i;
+                            }
+                        }
+                        if (idx != -1)
+                        {
+                            IPAddress rcvIp = IPAddress.Parse(Server.listSocket[idx].lockIp);
+                            IPEndPoint responsetarget = new IPEndPoint(rcvIp, Server.listSocket[idx].port);
+
+                            Server.listSocket[idx].clientSocket.SendTo(IPHelper.MsgToByte($"{usernameSender} :" + msg), responsetarget);
+                        }
+                        else
+                        {
+                            clientSocket.Send(IPHelper.MsgToByte("Target not found"));
+                        }
+                    }
+
+                    if (action == "BYE")
+                    {
+                        int idx = -1;
+                        for (int i = 0; i < Server.listSocket.Count; i++)
+                        {
+                            SocketListener o = Server.listSocket[i];
+
+                            if (o.lockIp == ipsender)
+                            {
+                                idx = i;
+                            }
+                        }
+                        Server.listSocket.RemoveAt(idx);
+                        break;
+                    }
+
+                    if (action == "HELLO")
+                    {  
+                        if (action == "HELLO")
+                        {  
+                            int idxCariUsername = -1;
+                            for (int i = 0; i < Server.listSocket.Count; i++)
+                            {
+                                SocketListener o = Server.listSocket[i];
+
+                                if (o.lockIp == ipsender)
+                                {
+                                    idxCariUsername = i;
+                                }
+                            }
+
+                            Server.listSocket[idxCariUsername].username = usernameSender;
+
+                            Server.printListSocket();
+                        }
+                    }
+
+                    data = null;
+                }
+```
+For the chat mechanism, there is 4 different protocols, such as
+1. Hello
+This protocol will triggered the server to register the username of connected client
+2. Ask
+This protocol will send back to the client the list of username connected
+3. Send
+This protocol will process the incoming message sent from a client to other
+4. Bye
+This protocol will remove the user from list 
+
+```
+# Client's Thread
+
+                    Thread.Sleep(500);
+                    byte[] Buffer = new byte[255];
+                    int rec = SocketClient.socket.Receive(Buffer, 0, Buffer.Length, 0);
+                    Array.Resize(ref Buffer, rec);
+
+                    string msgGet = Encoding.Default.GetString(Buffer);
+                    if (msgGet != "")
+                    {
+                        Console.WriteLine("asdd" + msgGet); 
+                        this.Invoke(new Action(() => this.addChat(msgGet)));   
+                    } 
+```
+This code is used to make sure that client is receiving message sent from the server on a thread
+this.Invoke is a code to access the form's component from inside a thread
+
+```
+# Protocol for sending message from client
+ void sendChat(string message)
+        { 
+            byte[] sdata = Encoding.Default.GetBytes($"SEND|{SocketClient.username}|{message}|{SocketClient.usernameTujuan}<EOF>");
+            SocketClient.socket.Send(sdata, 0, sdata.Length, 0);
+        }
+```
+As described in each protocol before, this is the function used on client to send message to the server.
+Everytime a client send a message, the client will send a message containing a collection of bytes that starts with SEND, and then separated with "|", after that the username, and then the message itself, and then the partner username, and last with <EOF> 
