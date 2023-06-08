@@ -193,13 +193,13 @@ Right here as can be seen, the server will hold a list of connected client socke
                 }
 ```
 For the chat mechanism, there is 4 different protocols, such as
-1. ```Hello```
+1. ```"Hello"```
 This protocol will triggered the server to register the username of connected client
-2. ```Ask```
+2. ```"Ask"```
 This protocol will send back to the client the list of username connected
-3. ```Send```
+3. ```"Send"```
 This protocol will process the incoming message sent from a client to other
-4. ```Bye```
+4. ```"Bye"```
 This protocol will remove the user from list 
 
 ```
